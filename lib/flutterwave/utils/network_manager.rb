@@ -17,8 +17,8 @@ module Flutterwave
         response = http.request(request)
 
         JSON.parse(response.body)
-      rescue SocketError, TypeError, EOFError, JSON::ParserError
-        return nil
+      rescue SocketError, TypeError, EOFError, JSON::ParserError => e
+        return JSON.parse("{\"data\":{\"responsecode\":\"99\",\"responsemessage\":\"#{e.message}\"},\"status\":\"failure\"}")
       end
     end
   end

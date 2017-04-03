@@ -12,9 +12,9 @@ module Flutterwave
         uri = URI.parse("#{BASE_URL}#{url}")
         request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
         request.body = body.to_json
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.request(request)
-        end
+        http = Net::HTTP.new(uri.hostname, uri.port)
+        http.use_ssl = (uri.scheme == 'https')
+        response = http.request(request)
 
         JSON.parse(response.body)
       rescue SocketError, TypeError, EOFError, JSON::ParserError

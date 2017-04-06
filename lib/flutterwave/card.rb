@@ -260,6 +260,23 @@ module Flutterwave
       Flutterwave::Response.new(response)
     end
 
+    def validate(options = {})
+      @options = options
+
+      request_params = {
+          otp: encrypt(:otp),
+          otptransactionidentifier: encrypt(:otptransactionidentifier),
+          merchantid: client.merchant_key
+      }
+
+      response = post(
+          Flutterwave::Utils::Constants::CARD[:validate_url],
+          request_params
+      )
+
+      Flutterwave::Response.new(response)
+    end
+
     def encrypt(key)
       plain_text = options[key].to_s
       raise Flutterwave::Utils::MissingKeyError.new(

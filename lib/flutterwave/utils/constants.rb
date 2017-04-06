@@ -48,7 +48,8 @@ module Flutterwave
         enquiry_url: '/pwc/rest/card/mvva/cardenquiry',
         validate_enquiry_url: '/pwc/rest/card/mvva/cardenquiry/validate',
         charge_url: '/pwc/rest/card/mvva/pay',
-        verify_url: '/pwc/rest/card/mvva/status'
+        verify_url: '/pwc/rest/card/mvva/status',
+        validate_url: '/pwc/rest/card/mvva/pay/validate'
       }.freeze
 
       ACCOUNT = {
